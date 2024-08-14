@@ -9,11 +9,33 @@
  * file that was distributed with this source code.
  */
 
-use Flarum\Database\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Builder;
 
-return Migration::addColumns('oauth_clients', [
-    'client_name' => ['string', 'length' => 500, 'default' => null, 'nullable' => true],
-    'client_icon' => ['string', 'length' => 500, 'default' => null, 'nullable' => true],
-    'client_desc' => ['string', 'length' => 1000, 'default' => null, 'nullable' => true],
-    'client_home' => ['string', 'length' => 200, 'default' => null, 'nullable' => true],
-]);
+return [
+    'up' => function (Builder $schema) {
+        if (!$schema->hasColumn('oauth_clients', 'client_name')) {
+            $schema->table('oauth_clients', function (Blueprint $table) use ($schema) {
+                $table->string('client_name',512)->default(null)->nullable();;
+            });
+        }
+        if (!$schema->hasColumn('oauth_clients', 'client_icon')) {
+            $schema->table('oauth_clients', function (Blueprint $table) use ($schema) {
+                $table->string('client_icon',512)->default(null)->nullable();;
+            });
+        }
+        if (!$schema->hasColumn('oauth_clients', 'client_desc')) {
+            $schema->table('oauth_clients', function (Blueprint $table) use ($schema) {
+                $table->string('client_desc',1024)->default(null)->nullable();;
+            });
+        }
+        if (!$schema->hasColumn('oauth_clients', 'client_home')) {
+            $schema->table('oauth_clients', function (Blueprint $table) use ($schema) {
+                $table->string('client_home',200)->default(null)->nullable();;
+            });
+        }
+    },
+    'down' => function (Builder $schema) {
+        
+    },
+];

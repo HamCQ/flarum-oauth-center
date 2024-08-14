@@ -1,5 +1,5 @@
 {
-    "name": "@foskym/flarum-oauth-center",
+    "name": "@hamcq/flarum-oauth-center",
     "private": true,
     "version": "0.0.0",
     "devDependencies": {

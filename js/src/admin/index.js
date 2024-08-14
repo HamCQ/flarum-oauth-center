@@ -1,8 +1,8 @@
 import app from 'flarum/admin/app';
 import SettingsPage from './components/SettingsPage';
-app.initializers.add('foskym/flarum-oauth-center', () => {
+app.initializers.add('hamcq/flarum-oauth-center', () => {
   app.extensionData
-    .for('foskym-oauth-center')
+    .for('hamcq-oauth-center')
     .registerPage(SettingsPage)
     .registerPermission(
     {

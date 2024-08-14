@@ -4,7 +4,7 @@ import UserPage from 'flarum/forum/components/UserPage';
 import LinkButton from 'flarum/common/components/LinkButton';
 import AuthorizePage from "./components/oauth/AuthorizePage";
 import AuthorizedPage from "./components/user/AuthorizedPage";
-app.initializers.add('foskym/flarum-oauth-center', () => {
+app.initializers.add('hamcq/flarum-oauth-center', () => {
   app.routes['oauth.authorize'] = {
     path: '/oauth/authorize',
     component: AuthorizePage
