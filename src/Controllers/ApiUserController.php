@@ -31,18 +31,18 @@ class ApiUserController implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $actor = RequestUtil::getActor($request);
+        
         $actor = $actor->toArray();
         $data = [
-            'id' => $actor['id'],
-            'username' => $actor['username'],
-            'nickname'  => $actor['nickname'],
-            'avatar_url' => $actor['avatar_url'],
-            'email' => $actor['email'],
-            'is_email_confirmed' => $actor['is_email_confirmed'],
-            'joined_at' => $actor['joined_at'],
-            'last_seen_at' => $actor['last_seen_at'],
-            'discussion_count' => $actor['discussion_count'],
-            'comment_count' => $actor['comment_count'],
+            'id' => isset($actor['id'])?$actor['id']:0,
+            'username' => isset($actor['username'])?$actor['username']:'',
+            'avatar_url' => isset($actor['avatar_url'])?$actor['avatar_url']:'',
+            'email' => isset($actor['email'])?$actor['email']:'',
+            'is_email_confirmed' => isset($actor['is_email_confirmed'])?$actor['is_email_confirmed']:0,
+            'joined_at' => isset($actor['joined_at'])?$actor['joined_at']:'',
+            'last_seen_at' => isset($actor['last_seen_at'])?$actor['last_seen_at']:'',
+            'discussion_count' => isset($actor['discussion_count'])?$actor['discussion_count']:0,
+            'comment_count' => isset($actor['comment_count'])?$actor['comment_count']:0,
         ];
         return new JsonResponse($data);
     }

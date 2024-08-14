@@ -15,6 +15,7 @@ use Flarum\Extend;
 use Flarum\Http\Middleware\AuthenticateWithHeader;
 use Flarum\Http\Middleware\CheckCsrfToken;
 use Flarum\Http\Middleware\ParseJsonBody;
+use FoskyM\OAuthCenter\Controllers\EmptyPageController;
 use FoskyM\OAuthCenter\Middlewares\ResourceScopeAuthMiddleware;
 use FoskyM\OAuthCenter\Middlewares\ResourceScopeFieldsMiddleware;
 use FoskyM\OAuthCenter\Middlewares\UnsetCsrfMiddleware;
@@ -24,7 +25,8 @@ return [
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
         ->css(__DIR__.'/less/forum.less')
-        ->route('/oauth/authorize', 'oauth.authorize'),
+        ->route('/oauth/authorize', 'oauth.authorize')
+        ->route('/u/{id}/authorized', 'oauth.authorized', EmptyPageController::class),
 
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js')

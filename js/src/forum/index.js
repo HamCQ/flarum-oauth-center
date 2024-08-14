@@ -20,8 +20,8 @@ app.initializers.add('foskym/flarum-oauth-center', () => {
         'authorized',
         LinkButton.component(
           {
-            href: app.route('user.authorized', { username: this.user.username() }),
-            icon: 'fas fa-user-friends',
+            href: app.route('user.authorized', { username: this.user.id() }),
+            icon: 'fas fa-clipboard-check',
           },
           [
             app.translator.trans('foskym-oauth-center.forum.page.label.authorized'),

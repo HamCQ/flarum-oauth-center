@@ -120,7 +120,8 @@ export default class AuthorizePage extends IndexPage {
                   <Tooltip text={this.client.client_desc()}>
                     <img src={this.client.client_icon()} alt="client_icon"/>
                   </Tooltip>
-                  <span>{this.client.client_name()}</span>
+                  <h3>{this.client.client_name()}</h3>
+                  <p>{this.client.client_desc()}</p>
                 </div>
                 <div class="oauth-scope-area">
                   <h3>{app.translator.trans('foskym-oauth-center.forum.authorize.require_these_scopes')}</h3>
@@ -133,17 +134,17 @@ export default class AuthorizePage extends IndexPage {
                       })
                   }
                 </div>
-                <form class="oauth-form" method="post" id="form" action="/oauth/authorize" onsubmit={this.onsubmit.bind(this)}>
+                <form class="oauth-form" method="post" id="oauth-form" action="/oauth/authorize" onsubmit={this.onsubmit.bind(this)}>
                   {Object.keys(this.params).map(key => (
                     <input type="hidden" name={key} value={this.params[key]} />
                   ))}
                   <input type="hidden" name="is_authorized" value={this.is_authorized}/>
-                  <div class="oauth-form-item oauth-btn-group">
-                    <Button className="Button" type="submit" style="width: 50%;" onclick={this.deny.bind(this)}
+                  <div class="oauth-form-item oauth-btn-group" style="text-align:center; justify-content: center;">
+                    <Button className="Button" type="submit" style="width: 30%;" onclick={this.deny.bind(this)}
                             loading={this.submit_loading}>
                       {app.translator.trans('foskym-oauth-center.forum.authorize.deny')}
                     </Button>
-                    <Button className="Button Button--primary" type="submit" style="width: 50%;"
+                    <Button className="Button Button--primary" type="submit" style="width: 30%; margin-left: 20px;"
                             onclick={this.agree.bind(this)} loading={this.submit_loading}>
                       {app.translator.trans('foskym-oauth-center.forum.authorize.agree')}
                     </Button>
@@ -165,6 +166,11 @@ export default class AuthorizePage extends IndexPage {
 
   onsubmit(e) {
     e.preventDefault();
+    if(!this.is_authorized){
+      window.location.href = "/"
+      return;
+    }
+    document.getElementsByName("is_authorized").value = this.is_authorized
     this.submit_loading = true;
     if (app.forum.attribute('foskym-oauth-center.authorization_method_fetch')) {
       app.request({
@@ -176,9 +182,11 @@ export default class AuthorizePage extends IndexPage {
         }
       }).then((params) => {
         window.location.href = params.location;
+        this.submit_loading = false;
       });
     } else {
-      e.target.submit();
+      document.getElementById('oauth-form').submit();
+      this.submit_loading = false;
     }
   }
 }
