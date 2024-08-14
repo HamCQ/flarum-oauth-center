@@ -1,5 +1,5 @@
 {
-    "name": "foskym/flarum-oauth-center",
+    "name": "hamcq/flarum-oauth-center",
     "description": "Allow user to authorize the third clients",
     "keywords": [
         "flarum",
@@ -19,6 +19,12 @@
             "email": "i@fosky.top",
             "role": "Developer",
             "homepage": "https://fosky.top"
+        },
+        {
+            "name": "Emin.ln",
+            "email": "emin.lin@live.com",
+            "role": "Developer",
+            "homepage": "https://forum.hamcq.cn"
         }
     ],
     "autoload": {
