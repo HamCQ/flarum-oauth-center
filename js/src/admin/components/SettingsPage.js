@@ -46,7 +46,7 @@ export default class SettingsPage extends ExtensionPage {
         className: `Button ${page === key ? 'item-selected' : ''}`,
         onclick: () => m.route.set(
           app.route('extension', {
-            id: 'foskym-oauth-center',
+            id: 'hamcq-oauth-center',
             page: key
           })
         ),
